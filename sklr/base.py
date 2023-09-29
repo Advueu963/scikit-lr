@@ -1,5 +1,5 @@
 """Base classes for all estimators."""
-
+import pandas as pd
 
 # =============================================================================
 # Imports
@@ -42,7 +42,10 @@ class LabelRankerMixin:
             The mean Kendall rank correlation coefficient :math:`\\tau`
             of ``self.predict(X)`` with respect to ``Y``.
         """
-        return tau_score(Y, self.predict(X), sample_weight)
+        if type(Y) is pd.DataFrame:
+            return tau_score(Y.values, self.predict(X), sample_weight)
+        else:
+            return tau_score(Y, self.predict(X), sample_weight)
 
     def _more_tags(self):
         """Define more tags for the label ranker."""
@@ -77,7 +80,10 @@ class PartialLabelRankerMixin:
             The mean Kendall rank correlation coefficient :math:`\\tau_X`
             of ``self.predict(X)`` with respect to ``Y``.
         """
-        return tau_x_score(Y, self.predict(X), sample_weight)
+        if type(Y) is pd.DataFrame:
+            return tau_x_score(Y.values, self.predict(X), sample_weight)
+        else:
+            return tau_x_score(Y, self.predict(X), sample_weight)
 
     def _more_tags(self):
         """Define more tags for the partial label ranker."""
