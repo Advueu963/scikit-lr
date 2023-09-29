@@ -41,7 +41,10 @@ class TestKNeighborsLabelRanker:
 
     def setup(self):
         """Setup the attributes for testing."""
-        (self.X, self.Y) = load_iris(problem="label_ranking")
+        features,ranks = load_iris(problem="label_ranking")
+        self.X = features.values
+        self.Y = ranks.values
+        #(self.X, self.Y) = load_iris(problem="label_ranking")
 
     def test_gets_raised(self):
         """Test that the handled errors are raised.
@@ -70,7 +73,7 @@ class TestKNeighborsLabelRanker:
     def test_score(self, n_neighbors, weights):
         """Test the score for "real" problems."""
         _check_knn_score(
-            KNeighborsLabelRanker(n_neighbors, weights), self.X, self.Y)
+            KNeighborsLabelRanker(n_neighbors, weights=weights), self.X, self.Y)
 
 
 class TestKNeighborsPartialLabelRanker:
@@ -85,4 +88,4 @@ class TestKNeighborsPartialLabelRanker:
     def test_score(self, n_neighbors, weights):
         """Test the score for "real" problems."""
         _check_knn_score(
-            KNeighborsPartialLabelRanker(n_neighbors, weights), self.X, self.Y)
+            KNeighborsPartialLabelRanker(n_neighbors, weights=weights), self.X, self.Y)
