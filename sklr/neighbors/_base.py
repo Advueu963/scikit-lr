@@ -9,7 +9,10 @@
 from sklearn.neighbors._base import _get_weights as get_weights
 import numpy as np
 
-
+# =============================================================================
+# Variables
+# =============================================================================
+VALID_WEIGHTS = ["uniform", "distance"]
 # =============================================================================
 # Functions
 # =============================================================================
@@ -20,7 +23,7 @@ def _get_weights(Y, dist, weights):
 
     # Assign a constant value if applying a uniform weighting
     # to weigh the samples by the number of available classes
-    sample_weight = sample_weight if sample_weight else 1
+    sample_weight = sample_weight if sample_weight is not None else 1
 
     mask = Y != -1
     sample_weight *= np.mean(mask, axis=2)
