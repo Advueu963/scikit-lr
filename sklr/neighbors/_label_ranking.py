@@ -1,5 +1,5 @@
 """Nearest neighbors label ranking."""
-
+from numbers import Integral
 
 # =============================================================================
 # Imports
@@ -35,6 +35,15 @@ class KNeighborsLabelRanker(KNeighborsMixin,
                  n_jobs=None,
                  **kwargs):
         """Constructor."""
+        if not isinstance(n_neighbors, Integral):
+            raise TypeError(
+                "n_neighbors does not take %s value, enter integer value"
+                % type(n_neighbors)
+            )
+        elif n_neighbors <= 0:
+            raise ValueError("Expected n_neighbors > 0. Got %d" % n_neighbors)
+        if not (weights in ["uniform", "distance"] or weights is callable or weights is None):
+            raise ValueError("Unknown weights. Must be uniform/distance or callable or None.")
         super(KNeighborsLabelRanker, self).__init__(n_neighbors,
                                                     algorithm=algorithm,
                                                     leaf_size=leaf_size,
@@ -49,6 +58,11 @@ class KNeighborsLabelRanker(KNeighborsMixin,
     def fit(self, X, Y):
         """Fit the k-nearest neighbors label ranker from the training
         dataset."""
+        if self.n_neighbors > X.shape[0]:
+                raise ValueError(
+                    "Expected n_neighbors <= n_samples, "
+                    " but n_samples = %d, n_neighbors = %d" % (X.shape[0], self.n_neighbors)
+                )
         return super(KNeighborsLabelRanker, self)._fit(X, Y)
 
     def predict(self, X):

@@ -673,7 +673,7 @@ def load_diau():
     (data_features, data_targets) = load_data(
         module_path=dirname(__file__),
         problem="label_ranking",
-        data_filename="diav.csv")
+        data_filename="diau.csv")
 
     # Initialize the meaning of the features
     feature_names = [
@@ -2069,7 +2069,7 @@ def load_vowel(problem):
     (data_features, data_targets) = load_data(
         module_path=dirname(__file__),
         problem=problem,
-        data_filename="vehicle.csv")
+        data_filename="vowel.csv")
 
     # Initialize the meaning of the features
     feature_names = [
@@ -2273,7 +2273,7 @@ def load_wisconsin():
     return (data_features, data_targets)
 
 
-def load_yeast(problem):
+def load_yeast():
     """Load and return the yeast dataset.
 
     The yeast dataset is a classic classification dataset

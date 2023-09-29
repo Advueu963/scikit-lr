@@ -87,6 +87,8 @@ def tau_x_score(Y_true, Y_pred, sample_weight=None):
     >>> tau_x_score(Y_true, Y_pred)
     0.11111111111111115
     """
+
+
     (Y_true, Y_pred) = _check_targets(Y_true, Y_pred)
 
     scores = np.zeros(Y_true.shape[0], dtype=np.float64)

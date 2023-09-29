@@ -53,19 +53,19 @@ class TestKNeighborsLabelRanker:
         k-nearest neighbors estimators. Therefore, they will be tested only
         here.
         """
-        with pytest.raises(TypeError, match="not take an integer value"):
+        with pytest.raises(TypeError, match="n_neighbors does not take"):
             KNeighborsLabelRanker(n_neighbors="foo").fit(self.X, self.Y)
 
-        with pytest.raises(ValueError, match="must be greater than zero"):
+        with pytest.raises(ValueError, match="Expected n_neighbors > 0"):
             KNeighborsLabelRanker(n_neighbors=0).fit(self.X, self.Y)
 
-        with pytest.raises(ValueError, match="less than or equal"):
+        with pytest.raises(ValueError, match="Expected n_neighbors <= n_samples"):
             KNeighborsLabelRanker(n_neighbors=151).fit(self.X, self.Y)
 
         with pytest.raises(ValueError, match="Unknown weights"):
             KNeighborsLabelRanker(weights="foo").fit(self.X, self.Y)
 
-        with pytest.raises(ValueError, match="Unknown metric"):
+        with pytest.raises(ValueError, match="Metric 'foo' not valid"):
             KNeighborsLabelRanker(metric="foo").fit(self.X, self.Y)
 
     @pytest.mark.parametrize("n_neighbors", VALID_NEIGHBORS)
