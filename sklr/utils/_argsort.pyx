@@ -17,7 +17,7 @@ from libc.stdlib cimport calloc, const_void, free, qsort
 # Methods
 # =============================================================================
 
-cdef int _compare(const_void *a, const_void *b) noexcept nogil:
+cdef int _compare(const_void *a, const_void *b) nogil:
     """Compare function for sorting the indexes."""
     cdef DTYPE_t comparison
 
