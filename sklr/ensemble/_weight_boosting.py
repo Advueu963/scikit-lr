@@ -113,13 +113,13 @@ class AdaBoostLabelRanker(LabelRankerMixin, BaseWeightBoosting):
     """
 
     def __init__(self,
-                 base_estimator=None,
+                 estimator=None,
                  n_estimators=50,
                  learning_rate=1.0,
                  random_state=None):
         """Constructor."""
         # Call to the constructor of the parent
-        super(AdaBoostLabelRanker, self).__init__(base_estimator=base_estimator,
+        super(AdaBoostLabelRanker, self).__init__(estimator=estimator,
                          n_estimators=n_estimators,
                          learning_rate=learning_rate,
                          random_state=random_state)
@@ -140,9 +140,9 @@ class AdaBoostLabelRanker(LabelRankerMixin, BaseWeightBoosting):
         # Check that the estimator support sample
         # weighting, raising the corresponding
         # exception when it is not supported
-        if not has_fit_parameter(self.base_estimator_, "sample_weight"):
+        if not has_fit_parameter(self.estimator_, "sample_weight"):
             raise ValueError("{} does not support sample_weight."
-                             .format(self.base_estimator_.__class__.__name__))
+                             .format(self.estimator_.__class__.__name__))
 
     def _boost(self, iboost, X, Y, sample_weight, random_state):
         estimator = self._make_estimator(random_state=random_state)

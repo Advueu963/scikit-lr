@@ -149,7 +149,7 @@ class ForestLabelRanker(LabelRankerMixin, BaseForest, ABC):
                  max_samples=None):
         """Constructor."""
         # Call to the constructor of the parent
-        super().__init__(base_estimator,
+        super().__init__(estimator=base_estimator,
                          n_estimators=n_estimators,
                          estimator_params=estimator_params,
                          bootstrap=bootstrap,
@@ -179,7 +179,7 @@ class ForestPartialLabelRanker(PartialLabelRankerMixin, BaseForest, ABC):
                  max_samples=None):
         """Constructor."""
         # Call to the constructor of the parent
-        super().__init__(base_estimator,
+        super().__init__(estimator=base_estimator,
                          n_estimators=n_estimators,
                          estimator_params=estimator_params,
                          bootstrap=bootstrap,

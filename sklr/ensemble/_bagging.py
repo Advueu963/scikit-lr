@@ -136,7 +136,7 @@ class BaggingLabelRanker(LabelRankerMixin, BaseBagging):
 
 
     def __init__(self,
-                 base_estimator=None,
+                 estimator=None,
                  n_estimators=10,
                  max_samples=1.0,
                  max_features=1.0,
@@ -145,13 +145,13 @@ class BaggingLabelRanker(LabelRankerMixin, BaseBagging):
                  random_state=None):
         """Constructor."""
         # Call to the constructor of the parent
-        super(BaggingLabelRanker,self).__init__(base_estimator,
-                         n_estimators=n_estimators,
-                         max_samples=max_samples,
-                         max_features=max_features,
-                         bootstrap=bootstrap,
-                         bootstrap_features=bootstrap_features,
-                         random_state=random_state)
+        super(BaggingLabelRanker,self).__init__(estimator=estimator,
+                                                n_estimators=n_estimators,
+                                                max_samples=max_samples,
+                                                max_features=max_features,
+                                                bootstrap=bootstrap,
+                                                bootstrap_features=bootstrap_features,
+                                                random_state=random_state)
 
     def _validate_estimator(self):
         """Check the estimator and set the base_estimator_ attribute."""
@@ -276,7 +276,7 @@ class BaggingPartialLabelRanker(PartialLabelRankerMixin, BaseBagging):
     """
 
     def __init__(self,
-                 base_estimator=None,
+                 estimator=None,
                  n_estimators=10,
                  max_samples=1.0,
                  max_features=1.0,
@@ -285,7 +285,7 @@ class BaggingPartialLabelRanker(PartialLabelRankerMixin, BaseBagging):
                  random_state=None):
         """Constructor."""
         # Call to the constructor of the parent
-        super().__init__(base_estimator,
+        super().__init__(estimator=estimator,
                          n_estimators=n_estimators,
                          max_samples=max_samples,
                          max_features=max_features,

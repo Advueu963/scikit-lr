@@ -182,7 +182,7 @@ def test_error(BaggingRanker):
         model.set_params(max_features="foo").fit(X_train, Y_train)
 
 
-@pytest.mark.base_estimator
+@pytest.mark.estimator
 @pytest.mark.parametrize(
     "BaseEstimator,DefaultEstimator,BaggingRanker",
     zip(BASE_ESTIMATORS, DEFAULT_ESTIMATORS, BAGGING))
@@ -190,21 +190,21 @@ def test_base_estimator(BaseEstimator, DefaultEstimator, BaggingRanker):
     """Test base_estimator and its default values."""
     # Initialize the bagging ranker using the None as base estimator
     # and assert that the base estimator is the default estimator
-    model = BaggingRanker(base_estimator=None, random_state=seed)
+    model = BaggingRanker(estimator=None, random_state=seed)
     clf = model.fit(X_train, Y_train)
-    assert isinstance(clf.base_estimator_, DefaultEstimator)
+    assert isinstance(clf.estimator_, DefaultEstimator)
 
     # Initialize the bagging ranker using the default estimator as base
     # estimator and assert that the base estimator is the default estimator
-    model = BaggingRanker(base_estimator=DefaultEstimator(), random_state=seed)
+    model = BaggingRanker(estimator=DefaultEstimator(), random_state=seed)
     clf = model.fit(X_train, Y_train)
-    assert isinstance(clf.base_estimator_, DefaultEstimator)
+    assert isinstance(clf.estimator_, DefaultEstimator)
 
     # Initialize the bagging ranker explictly given the
     # base estimator and assert that it is properly set
-    model = BaggingRanker(base_estimator=BaseEstimator(), random_state=seed)
+    model = BaggingRanker(estimator=BaseEstimator(), random_state=seed)
     clf = model.fit(X_train, Y_train)
-    assert isinstance(clf.base_estimator_, BaseEstimator)
+    assert isinstance(clf.estimator_, BaseEstimator)
 
 
 @pytest.mark.bagging_sample_weight_unsupported_but_passed

@@ -136,12 +136,12 @@ def test_error(AdaBoostRanker):
     # Assert that an error is raised when
     # the learning rate is less than zero
     with pytest.raises(ValueError):
-        model.set_hyperparams(learning_rate=-1).fit(X_train, Y_train)
+        model.set_params(learning_rate=-1).fit(X_train, Y_train)
 
     # Assert that an error is raised when the learning
     # rate is not an integer or floating data type
     with pytest.raises(TypeError):
-        model.set_hyperparams(learning_rate="foo").fit(X_train, Y_train)
+        model.set_params(learning_rate="foo").fit(X_train, Y_train)
 
 
 @pytest.mark.sample_weight_missing
@@ -152,7 +152,7 @@ def test_sample_weight_missing(DefficientBaseEstimator, AdaBoostRanker):
     """Test that if sample weight is not supported, an error is raised."""
     # Initialize the boosting ranker
     # with deficient base estimator
-    model = AdaBoostRanker(base_estimator=DefficientBaseEstimator(),
+    model = AdaBoostRanker(estimator=DefficientBaseEstimator(),
                            random_state=seed)
 
     # Assert that an exception is raised when trying
